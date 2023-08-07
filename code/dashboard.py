@@ -22,7 +22,8 @@ selected_status = st.sidebar.selectbox("Filtrar por Status", ["Todos"] + statuse
 filtered_accounts = accounts_df if selected_status == "Todos" else accounts_df[accounts_df["Status"] == selected_status]
 
 # Conversão da coluna "Mês de Criação" para strings no formato YYYY-MM para evitar erro de serialização
-filtered_accounts["Mês de Criação"] = filtered_accounts["Data de Criação"].dt.to_period("M").astype(str)
+filtered_accounts.loc[:, "Mês de Criação"] = filtered_accounts["Data de Criação"].dt.to_period("M").astype(str)
+
 
 # Gráfico de barras por status
 status_counts = filtered_accounts["Status"].value_counts()
